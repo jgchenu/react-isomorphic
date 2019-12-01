@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "repository": "git@github.com:jgchenu/react-isomorphic.git",
   "scripts": {
-    "dev": "nodemon ./build/main.js",
-    "build": "webpack --config webpack.server.js --watch"
+    "dev": "npm-run-all --parallel dev:**",
+    "dev:start": "nodemon --watch build --exec node ./build/main.js ",
+    "dev:server": "webpack --config webpack.server.js --watch"
   },
   "author": "jgchenu <jgchenu@foxmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.4",
@@ -25,6 +25,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "npm-run-all": "^4.1.5"
   }
 }
