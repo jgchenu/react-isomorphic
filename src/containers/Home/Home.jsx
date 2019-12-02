@@ -4,7 +4,7 @@ function Home() {
   return (
     <div>
       <p>this is react home sdsdsd page</p>
-      <button onClick={console.log("click!!!!!")}>click</button>
+      <button onClick={() =>{console.log("click!!!!!")}}>click</button>
     </div>
   );
 }
