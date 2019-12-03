@@ -6,6 +6,25 @@ const clientConfig = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "public")
+  },
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              }
+            }
+          },
+          "less-loader"
+        ]
+      }
+    ]
   }
 };
 module.exports = merge(baseConfig, clientConfig);
