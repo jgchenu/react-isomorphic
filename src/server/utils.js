@@ -17,7 +17,7 @@ export const render = ctx => {
 
   const html = `
       <html>
-      <head><title>react ssr</title></head>
+      <head><title>react ssr</title><link href="/main.css" rel="stylesheet"></head>
       <body><div id="root">${content}</div></body>
       <script src="/main.js"></script>
       </html>
