@@ -3,16 +3,29 @@ const merge = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
+const LoadablePlugin = require("@loadable/webpack-plugin");
 const baseConfig = require("./webpack.base");
+
+const env = process.env.NODE_ENV || "development";
+
 const clientConfig = {
+  mode: env,
+  target: "web",
   entry: "./src/client/index.js",
   output: {
-    filename: "main.js",
-    publicPath:'publicPath', // 打包跟devServer给静态资源自动加上的路径前缀
-    path: path.resolve(__dirname, "public")
+    filename: "client.js",
+    path: path.resolve(__dirname, "static")
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   module: {
     rules: [
+      {
+        test: /.jsx?$/,
+        loader: "babel-loader",
+        exclude: /node_modules/
+      },
       {
         test: /\.less$/,
         use: [
@@ -35,14 +48,14 @@ const clientConfig = {
   plugins: [
     // new CleanWebpackPlugin(),
     // new HtmlWebpackPlugin(),
+    new LoadablePlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
-    }),
-
+    })
   ],
-  devServer:{
-    contentBase:'./'
+  devServer: {
+    contentBase: "./"
   }
 };
 module.exports = merge(baseConfig, clientConfig);

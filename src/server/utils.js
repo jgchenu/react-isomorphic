@@ -3,10 +3,9 @@ import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import Routes from "./../Routes";
 import React from "react";
-import store from './../store';
+import store from "./../store";
 
 export const render = ctx => {
-
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter context={{}} location={ctx.path}>

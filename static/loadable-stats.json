@@ -1,0 +1,163 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "4.41.4",
+  "hash": "ac372c40e34ea655cdfc",
+  "publicPath": "",
+  "outputPath": "/Users/jgchen/Desktop/react-isomorphic/static",
+  "assetsByChunkName": {
+    "Home-jsx": [
+      "Home-jsx.css",
+      "Home-jsx.client.js"
+    ],
+    "Login-jsx": "Login-jsx.client.js",
+    "main": "client.js"
+  },
+  "assets": [
+    {
+      "name": "Home-jsx.client.js",
+      "size": 4157,
+      "chunks": [
+        "Home-jsx"
+      ],
+      "chunkNames": [
+        "Home-jsx"
+      ],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "Home-jsx.css",
+      "size": 58,
+      "chunks": [
+        "Home-jsx"
+      ],
+      "chunkNames": [
+        "Home-jsx"
+      ],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "Login-jsx.client.js",
+      "size": 1006,
+      "chunks": [
+        "Login-jsx"
+      ],
+      "chunkNames": [
+        "Login-jsx"
+      ],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "client.js",
+      "size": 1537303,
+      "chunks": [
+        "main"
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {},
+      "emitted": false
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        "main"
+      ],
+      "assets": [
+        "client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "main": {
+      "chunks": [
+        "main"
+      ],
+      "assets": [
+        "client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "Home-jsx": {
+      "chunks": [
+        "Home-jsx"
+      ],
+      "assets": [
+        "Home-jsx.css",
+        "Home-jsx.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "Login-jsx": {
+      "chunks": [
+        "Login-jsx"
+      ],
+      "assets": [
+        "Login-jsx.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 5,
+      "debug": false
+    }
+  },
+  "children": [
+    {
+      "errors": [],
+      "warnings": [],
+      "publicPath": "",
+      "outputPath": "/Users/jgchen/Desktop/react-isomorphic/static",
+      "assetsByChunkName": {},
+      "assets": [],
+      "filteredAssets": 0,
+      "entrypoints": {
+        "mini-css-extract-plugin": {
+          "chunks": [
+            "mini-css-extract-plugin"
+          ],
+          "assets": [
+            "*"
+          ],
+          "children": {},
+          "childAssets": {}
+        }
+      },
+      "namedChunkGroups": {
+        "mini-css-extract-plugin": {
+          "chunks": [
+            "mini-css-extract-plugin"
+          ],
+          "assets": [
+            "*"
+          ],
+          "children": {},
+          "childAssets": {}
+        }
+      },
+      "logging": {
+        "webpack.buildChunkGraph.visitModules": {
+          "entries": [],
+          "filteredEntries": 2,
+          "debug": false
+        }
+      },
+      "children": [],
+      "name": "mini-css-extract-plugin node_modules/css-loader/dist/cjs.js??ref--5-1!node_modules/less-loader/dist/cjs.js!src/containers/Home/style.less"
+    }
+  ]
+}

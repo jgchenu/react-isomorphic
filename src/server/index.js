@@ -3,11 +3,11 @@ import KoaRouter from "koa-router";
 import KoaStatic from "koa-static";
 import chalk from "chalk";
 import { render } from "./utils";
-
+// import SSR from "../..";
 const router = new KoaRouter();
 const app = new Koa();
 
-app.use(KoaStatic("public"));
+app.use(KoaStatic("static"));
 
 router.get("*", async ctx => {
   ctx.body = render(ctx);
@@ -15,6 +15,6 @@ router.get("*", async ctx => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log(chalk.yellow("listen at 3000"));
 });

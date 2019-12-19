@@ -4,6 +4,7 @@ import Routes from "./../Routes";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./../store";
+import { loadableReady } from "@loadable/component";
 
 const App = () => {
   return (
@@ -15,4 +16,6 @@ const App = () => {
   );
 };
 
-ReactDOM.hydrate(<App />, document.getElementById("root"));
+loadableReady(() => {
+  ReactDOM.hydrate(<App />, document.getElementById("root"));
+});

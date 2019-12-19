@@ -1,5 +1,6 @@
 module.exports = function(api) {
   api.cache(true);
+
   const presets = [
     "@babel/preset-react",
     [
@@ -13,7 +14,8 @@ module.exports = function(api) {
       }
     ]
   ];
-  const plugins = [];
+
+  const plugins = ["@loadable/babel-plugin"];
 
   return {
     presets,
