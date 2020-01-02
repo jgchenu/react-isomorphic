@@ -1,7 +1,5 @@
-module.exports = function(api) {
-  api.cache(true);
-
-  const presets = [
+module.exports = {
+  presets: [
     "@babel/preset-react",
     [
       "@babel/env",
@@ -13,12 +11,6 @@ module.exports = function(api) {
         corejs: "3.0.0"
       }
     ]
-  ];
-
-  const plugins = ["@loadable/babel-plugin"];
-
-  return {
-    presets,
-    plugins
-  };
+  ],
+  plugins: ["@loadable/babel-plugin"]
 };

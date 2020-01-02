@@ -1,9 +1,9 @@
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
-const merge = require("webpack-merge");
-const baseConfig = require("./webpack.base");
+const env = process.env.NODE_ENV || "development";
 
 const serverConfig = {
+  env,
   target: "node",
   entry: "./src/server/index.js",
   output: {
@@ -32,4 +32,4 @@ const serverConfig = {
   externals: [nodeExternals()]
 };
 
-module.exports = merge(baseConfig, serverConfig);
+module.exports = serverConfig;

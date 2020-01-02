@@ -1,12 +1,12 @@
 const path = require("path");
-const merge = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
-const baseConfig = require("./webpack.base");
 
 const env = process.env.NODE_ENV || "development";
+
+const babelClientOptions = require('./babel.client.config');
 
 const clientConfig = {
   mode: env,
@@ -24,7 +24,8 @@ const clientConfig = {
       {
         test: /.jsx?$/,
         loader: "babel-loader",
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: babelClientOptions,
       },
       {
         test: /\.less$/,
@@ -58,4 +59,4 @@ const clientConfig = {
     contentBase: "./"
   }
 };
-module.exports = merge(baseConfig, clientConfig);
+module.exports = clientConfig;
