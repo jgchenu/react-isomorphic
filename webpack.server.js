@@ -3,7 +3,7 @@ const nodeExternals = require("webpack-node-externals");
 const env = process.env.NODE_ENV || "development";
 
 const serverConfig = {
-  env,
+  mode: env,
   target: "node",
   entry: "./src/server/index.js",
   output: {
@@ -26,6 +26,12 @@ const serverConfig = {
           },
           "less-loader"
         ]
+      },
+      {
+        test: /.jsx?$/,
+        loader: "babel-loader",
+        exclude: /node_modules/,
+        options: babelClientOptions
       }
     ]
   },

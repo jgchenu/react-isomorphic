@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm-run-all --parallel dev:**",
     "build": "npm-run-all --parallel build:**",
-    "dev:start": "nodemon --watch build --exec node ./build/main.js ",
+    "dev:start": "nodemon --exec node ./build/main.js ",
     "dev:server": "webpack --config webpack.server.js --watch",
     "dev:client": "webpack-dev-server --config webpack.client.js --open",
     "build:client": "webpack --config webpack.client.js",

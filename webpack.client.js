@@ -6,14 +6,14 @@ const LoadablePlugin = require("@loadable/webpack-plugin");
 
 const env = process.env.NODE_ENV || "development";
 
-const babelClientOptions = require('./babel.client.config');
+const babelClientOptions = require("./babel.client.config");
 
 const clientConfig = {
   mode: env,
   target: "web",
   entry: "./src/client/index.js",
   output: {
-    filename: "client.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "static")
   },
   resolve: {
@@ -25,7 +25,7 @@ const clientConfig = {
         test: /.jsx?$/,
         loader: "babel-loader",
         exclude: /node_modules/,
-        options: babelClientOptions,
+        options: babelClientOptions
       },
       {
         test: /\.less$/,
@@ -56,7 +56,7 @@ const clientConfig = {
     })
   ],
   devServer: {
-    contentBase: "./"
+    contentBase: "./static"
   }
 };
 module.exports = clientConfig;
