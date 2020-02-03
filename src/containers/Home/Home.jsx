@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
 import styles from "./style.less";
 function Home() {
   const state = useSelector(state => state);

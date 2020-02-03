@@ -5,11 +5,11 @@ module.exports = {
       "@babel/env",
       {
         targets: {
-          browsers: "last 2 versions"
+          node: "current"
         },
-        useBuiltIns: "usage",
-        corejs: "3.0.0"
+        modules: "commonjs"
       }
     ]
   ],
+  plugins: ["@loadable/babel-plugin"]
 };

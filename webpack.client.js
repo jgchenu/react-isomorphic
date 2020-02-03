@@ -1,21 +1,31 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-// const HtmlWebpackPlugin = require("html-webpack-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
+
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const env = process.env.NODE_ENV || "development";
 const babelClientOptions = require("./babel.client.config");
 
+const isDev = env === "development";
+
+const port = process.env.PORT || 9999;
+const host = process.env.HOST || "0.0.0.0";
+const publicPath = `//${host}:${port}/`;
+const OUTPUT_PATH = path.resolve(__dirname, "./static");
 const clientConfig = {
   mode: env,
   target: "web",
-  entry: "./client/index.js",
+  entry: {
+    client: ["./client/index.js"]
+  },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "static")
+    chunkFilename: "[name].js",
+    path: OUTPUT_PATH,
+    publicPath
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+    extensions: [".js", ".jsx"]
   },
   module: {
     rules: [
@@ -35,7 +45,7 @@ const clientConfig = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[name]__[local]--[hash:base64:5]"
+                localIdentName: "[name]__[local]___[hash:base64:5]"
               }
             }
           },
@@ -45,8 +55,9 @@ const clientConfig = {
     ]
   },
   plugins: [
-    // new CleanWebpackPlugin(),
-    // new HtmlWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [OUTPUT_PATH]
+    }),
     new LoadablePlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].css",
@@ -54,7 +65,13 @@ const clientConfig = {
     })
   ],
   devServer: {
-    contentBase: "./static"
+    publicPath,
+    host,
+    port,
+    writeToDisk: function(filePath) {
+      if (/loadable-stats\.json/.test(filePath)) return true;
+      return false;
+    }
   }
 };
 module.exports = clientConfig;

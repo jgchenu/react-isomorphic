@@ -3,21 +3,26 @@ const KoaRouter = require("koa-router");
 const KoaStatic = require("koa-static");
 const chalk = require("chalk");
 const path = require("path");
-const ROOT_PATH = path.resolve(__dirname, "../");
-const render = require(path.resolve(ROOT_PATH, "./build/main"));
+
 const router = new KoaRouter();
 const app = new Koa();
 
-console.log(render);
+const ROOT_PATH = path.resolve(__dirname, "..");
+const renderPath = path.resolve(ROOT_PATH, "./build/main.js");
+
+delete require.cache[require.resolve(renderPath)];
+
+const render = require(renderPath).default;
 
 app.use(KoaStatic("static"));
 
 router.get("*", async ctx => {
+  ctx.status = 200;
   ctx.body = render(ctx);
 });
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log(chalk.yellow("listen at 3000"));
 });
