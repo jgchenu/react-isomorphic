@@ -1,11 +1,12 @@
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const env = process.env.NODE_ENV || "development";
+const babelServerOptions = require("./babel.server.config");
 
 const serverConfig = {
   mode: env,
   target: "node",
-  entry: "./src/server/index.js",
+  entry: "./isomorphic/index.js",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "build")
@@ -31,7 +32,7 @@ const serverConfig = {
         test: /.jsx?$/,
         loader: "babel-loader",
         exclude: /node_modules/,
-        options: babelClientOptions
+        options: babelServerOptions
       }
     ]
   },

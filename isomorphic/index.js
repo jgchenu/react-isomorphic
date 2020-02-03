@@ -1,14 +1,13 @@
-import { ChunkExtractor } from "@loadable/server";
 import React from "react";
-import React from "react";
+import { StaticRouter } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
-import { StaticRouter } from "react-router-dom";
+import { ChunkExtractor } from "@loadable/server";
 import path from "path";
-import store from "./../store";
-import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import store from "../src/store";
+import Routes from "../src/Routes";
 
-function render(ctx, initialData = {}) {
+export default function render(ctx, initialData = {}) {
   const extractor = new ChunkExtractor({
     statsFile: path.resolve("../dist/loadable-stats.json")
   });

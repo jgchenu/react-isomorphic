@@ -3,15 +3,13 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
-
 const env = process.env.NODE_ENV || "development";
-
 const babelClientOptions = require("./babel.client.config");
 
 const clientConfig = {
   mode: env,
   target: "web",
-  entry: "./src/client/index.js",
+  entry: "./client/index.js",
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "static")
