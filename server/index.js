@@ -8,9 +8,10 @@ const router = new KoaRouter();
 const app = new Koa();
 
 const ROOT_PATH = path.resolve(__dirname, "..");
+
 const renderPath = path.resolve(ROOT_PATH, "./build/main.js");
 
-delete require.cache[require.resolve(renderPath)];
+// delete require.cache[require.resolve(renderPath)];
 
 const render = require(renderPath).default;
 

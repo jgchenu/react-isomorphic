@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "../src/store";
 import Routes from "../src/Routes";
 
-const ROOT_PATH = path.join(process.cwd(__dirname), "./");
+const ROOT_PATH = path.resolve(process.cwd(), ".");
 
 export default function render(ctx, initialData = {}) {
   const extractor = new ChunkExtractor({
