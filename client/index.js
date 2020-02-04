@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "../src/Routes";
 import { Provider } from "react-redux";
 import store from "../src/store";
+import "./../src/common/styles/basic.less";
 
 const App = () => {
   return (
