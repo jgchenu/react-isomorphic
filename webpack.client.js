@@ -7,7 +7,6 @@ const env = process.env.NODE_ENV || "development";
 const babelClientOptions = require("./babel.client.config");
 
 const isDev = env === "development";
-
 const port = process.env.PORT || 9999;
 const host = process.env.HOST || "0.0.0.0";
 const publicPath = `//${host}:${port}/`;
@@ -16,7 +15,7 @@ const clientConfig = {
   mode: env,
   target: "web",
   entry: {
-    client: ["./client/index.js"]
+    client: ["react-hot-loader/patch", "./client/index.js"]
   },
   output: {
     filename: "[name].js",
@@ -39,7 +38,10 @@ const clientConfig = {
         test: /\.less$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev
+            }
           },
           {
             loader: "css-loader",
@@ -65,6 +67,10 @@ const clientConfig = {
     })
   ],
   devServer: {
+    hot: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    },
     publicPath,
     host,
     port,

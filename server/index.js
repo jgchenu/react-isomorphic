@@ -11,14 +11,12 @@ const ROOT_PATH = path.resolve(__dirname, "..");
 
 const renderPath = path.resolve(ROOT_PATH, "./build/main.js");
 
-// delete require.cache[require.resolve(renderPath)];
-
-const render = require(renderPath).default;
-
 app.use(KoaStatic("static"));
 
 router.get("*", async ctx => {
   ctx.status = 200;
+  delete require.cache[require.resolve(renderPath)];
+  const render = require(renderPath).default;
   ctx.body = render(ctx);
 });
 

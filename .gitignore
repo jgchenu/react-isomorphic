@@ -13,4 +13,4 @@ run/
 typings/
 .nyc_output/
 build/
-static/
+static/loadable-stats.json

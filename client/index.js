@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Routes from "../src/Routes";
+import { hot } from "react-hot-loader/root";
+import { loadableReady } from "@loadable/component";
 import { BrowserRouter as Router } from "react-router-dom";
+
+import Routes from "../src/Routes";
 import { Provider } from "react-redux";
 import store from "../src/store";
-import { loadableReady } from "@loadable/component";
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
   );
 };
 
+const WrapApp = hot(App);
+
 loadableReady(() => {
-  ReactDOM.hydrate(<App />, document.getElementById("root"));
+  ReactDOM.hydrate(<WrapApp />, document.getElementById("root"));
 });
