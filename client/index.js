@@ -3,18 +3,18 @@ import ReactDOM from "react-dom";
 import { hot } from "react-hot-loader/root";
 import { loadableReady } from "@loadable/component";
 import { BrowserRouter as Router } from "react-router-dom";
+import { renderRoutes } from "react-router-config";
 
-import Routes from "../src/Routes";
+import routes from "../src/routes";
 import { Provider } from "react-redux";
-import store from "../src/store";
+import { getStore } from "../src/redux";
 import "./../src/common/styles/basic.less";
 
+const store = getStore();
 const App = () => {
   return (
     <Provider store={store}>
-      <Router>
-        <Routes />
-      </Router>
+      <Router>{renderRoutes(routes)}</Router>
     </Provider>
   );
 };

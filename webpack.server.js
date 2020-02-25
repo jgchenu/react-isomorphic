@@ -2,7 +2,6 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const env = process.env.NODE_ENV || "development";
 const babelServerOptions = require("./babel.server.config");
-const LoadablePlugin = require("@loadable/webpack-plugin");
 
 // const isDev = env === "development";
 // const port = process.env.PORT || 9999;
@@ -18,6 +17,10 @@ const serverConfig = {
     path: path.resolve(__dirname, "build"),
     libraryTarget: "commonjs2"
   },
+  resolve: {
+    extensions: [".js", ".jsx"]
+  },
+  devtool: "source-map",
   module: {
     rules: [
       {

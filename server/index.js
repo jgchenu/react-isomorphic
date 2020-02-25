@@ -17,11 +17,11 @@ router.get("*", async ctx => {
   ctx.status = 200;
   delete require.cache[require.resolve(renderPath)];
   const render = require(renderPath).default;
-  ctx.body = render(ctx);
+  ctx.body = await render(ctx);
 });
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000, () => {
-  console.log(chalk.yellow("listen at 3000"));
+app.listen(3001, () => {
+  console.log(chalk.yellow("listen at 3001"));
 });
