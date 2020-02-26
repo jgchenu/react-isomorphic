@@ -10,7 +10,7 @@ import { renderRoutes, matchRoutes } from "react-router-config";
 
 const ROOT_PATH = path.resolve(process.cwd(), ".");
 
-export default async function render(ctx, initialData = {}) {
+export default async function render(ctx) {
   const store = getStore();
   const matchedRoutes = matchRoutes(routes, ctx.url);
   const preloadPromises = [];
@@ -18,10 +18,15 @@ export default async function render(ctx, initialData = {}) {
   matchedRoutes.forEach(route => {
     const preloadData = route.route.component.preloadData;
     if (preloadData) {
-      preloadPromises.push(preloadData(store.dispatch));
+      preloadPromises.push(
+        preloadData({
+          dispatch: store.dispatch
+        })
+      );
     }
   });
   await Promise.all(preloadPromises);
+  const __INITIAL_DATA__ = store.getState();
   const extractor = new ChunkExtractor({
     statsFile: path.resolve(ROOT_PATH, "./static/loadable-stats.json"),
     entrypoints: ["client"]
@@ -52,7 +57,7 @@ export default async function render(ctx, initialData = {}) {
         <body>
           <div id="root">${html}</div>
           <script type="text/javascript">window.__INITIAL_DATA__ = ${JSON.stringify(
-            initialData
+            __INITIAL_DATA__
           )}</script>
           ${renderedScriptTags}
         </body>

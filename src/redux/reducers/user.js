@@ -1,10 +1,15 @@
-const defaultState = {
-  name: "jgchen",
-  number: 2016130201
-};
+import { SET_USER } from "./../actions/actionTypes";
+
+const defaultState = {};
 
 function userReducer(state = defaultState, action) {
-  return state;
+  switch (action.type) {
+    case SET_USER: {
+      return action.payload;
+    }
+    default:
+      return state;
+  }
 }
 
 export default userReducer;

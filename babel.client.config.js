@@ -12,5 +12,9 @@ module.exports = {
       }
     ]
   ],
-  plugins: ["@loadable/babel-plugin", "react-hot-loader/babel"]
+  plugins: [
+    "@loadable/babel-plugin",
+    "react-hot-loader/babel",
+    "@babel/plugin-transform-runtime"
+  ]
 };

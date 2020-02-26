@@ -2,6 +2,7 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const env = process.env.NODE_ENV || "development";
 const babelServerOptions = require("./babel.server.config");
+const EslintFriendlyFormatter = require("eslint-friendly-formatter");
 
 // const isDev = env === "development";
 // const port = process.env.PORT || 9999;
@@ -46,6 +47,15 @@ const serverConfig = {
         loader: "babel-loader",
         exclude: /node_modules/,
         options: babelServerOptions
+      },
+      {
+        test: /.jsx?$/,
+        loader: "eslint-loader",
+        enforce: "pre",
+        exclude: /node_modules/,
+        options: {
+          formatter: EslintFriendlyFormatter
+        }
       }
     ]
   },

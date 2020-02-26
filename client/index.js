@@ -7,10 +7,10 @@ import { renderRoutes } from "react-router-config";
 
 import routes from "../src/routes";
 import { Provider } from "react-redux";
-import { getStore } from "../src/redux";
+import { getClientStore } from "../src/redux";
 import "./../src/common/styles/basic.less";
 
-const store = getStore();
+const store = getClientStore();
 const App = () => {
   return (
     <Provider store={store}>
