@@ -14,10 +14,16 @@ const renderPath = path.resolve(ROOT_PATH, "./build/main.js");
 app.use(KoaStatic("static"));
 
 router.get("*", async ctx => {
-  ctx.status = 200;
   delete require.cache[require.resolve(renderPath)];
   const render = require(renderPath).default;
-  ctx.body = await render(ctx);
+  const context = {};
+  const html = await render(ctx, context);
+  if (context.action === "REPLACE") {
+    ctx.status = 301;
+    return ctx.redirect(context.url);
+  }
+  ctx.status = context.status || 200;
+  ctx.body = html;
 });
 
 app.use(router.routes()).use(router.allowedMethods());

@@ -7,10 +7,11 @@ import { Provider } from "react-redux";
 import { getStore } from "../src/redux";
 import routes from "../src/routes";
 import { renderRoutes, matchRoutes } from "react-router-config";
+import Helmet from "react-helmet";
 
 const ROOT_PATH = path.resolve(process.cwd(), ".");
 
-export default async function render(ctx) {
+export default async function render(ctx, context) {
   const store = getStore();
   const matchedRoutes = matchRoutes(routes, ctx.url);
   const preloadPromises = [];
@@ -19,9 +20,16 @@ export default async function render(ctx) {
     const preloadData = route.route.component.preloadData;
     if (preloadData) {
       preloadPromises.push(
-        preloadData({
-          dispatch: store.dispatch
-        })
+        (async () => {
+          try {
+            return await preloadData({
+              dispatch: store.dispatch
+            });
+          } catch (error) {
+            // 即使其中一个preloadData失败了，其他成功了，那么页面也能够正常返回
+            return null;
+          }
+        })()
       );
     }
   });
@@ -34,13 +42,14 @@ export default async function render(ctx) {
 
   const jsx = extractor.collectChunks(
     <Provider store={store}>
-      <StaticRouter context={{}} location={ctx.path}>
+      <StaticRouter context={context} location={ctx.path}>
         {renderRoutes(routes)}
       </StaticRouter>
     </Provider>
   );
 
   const html = ReactDOMServer.renderToString(jsx);
+  const helmet = Helmet.renderStatic();
   const renderedScriptTags = extractor.getScriptTags();
   const renderedLinkTags = extractor.getLinkTags();
   const renderedStyleTags = extractor.getStyleTags();
@@ -51,6 +60,8 @@ export default async function render(ctx) {
         <head>
           <meta charset="UTF-8">
           <title>React App</title>
+          ${helmet.title.toString()}
+          ${helmet.meta.toString()}
           ${renderedLinkTags}
           ${renderedStyleTags}
         </head>

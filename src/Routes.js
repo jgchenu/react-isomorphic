@@ -1,7 +1,14 @@
 import Home from "./containers/Home";
 import Login from "./containers/Login";
-import Root from "./App";
+import NotFound from "./containers/NotFound";
+import React from "react";
 
+import Root from "./App";
+import { Redirect } from "react-router-dom";
+
+function RedirectComp() {
+  return <Redirect to="/login" />;
+}
 const routes = [
   {
     component: Root,
@@ -14,6 +21,14 @@ const routes = [
       {
         path: "/login",
         component: Login
+      },
+      {
+        path: "/redirect",
+        component: RedirectComp
+      },
+      {
+        path: "*",
+        component: NotFound
       }
     ]
   }

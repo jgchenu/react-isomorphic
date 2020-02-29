@@ -22,10 +22,11 @@ const clientConfig = {
     client: ["react-hot-loader/patch", "./client/index.js"]
   },
   output: {
-    filename: "[name].js",
-    chunkFilename: "[name].js",
+    filename: isDev ? "[name].js" : "[name]-[contenthash].js",
+    chunkFilename: isDev ? "[name].js" : "[name]-[contenthash].js",
     path: OUTPUT_PATH,
-    publicPath
+    publicPath,
+    sourceMapFilename: "[file].map"
   },
   resolve: {
     extensions: [".js", ".jsx"]
@@ -60,6 +61,7 @@ const clientConfig = {
           {
             loader: "css-loader",
             options: {
+              sourceMap: true,
               modules: {
                 localIdentName: "[name]__[local]___[hash:base64:5]"
               }
@@ -80,8 +82,8 @@ const clientConfig = {
       files: ["**/*.css", "**/*.less"]
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: isDev ? "[name].css" : "[name]-[hash].css",
+      chunkFilename: isDev ? "[name].css" : "[name]-[hash].css"
     })
   ],
   devServer: {
